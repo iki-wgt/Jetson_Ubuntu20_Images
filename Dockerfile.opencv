@@ -7,9 +7,8 @@ ARG OPEN_CV_VERSION=4.5.0
 # overwrite with cuda opencv
 #
 WORKDIR /tmp
-RUN --mount=target=/assets,type=bind,source=assets \
-    cp /assets/OpenCV-${OPEN_CV_VERSION}-aarch64-ubuntu20.zip . && \
-    unzip OpenCV-${OPEN_CV_VERSION}-aarch64-ubuntu20.zip && \
+COPY assets/OpenCV-${OPEN_CV_VERSION}-aarch64-ubuntu20.zip /tmp
+RUN unzip OpenCV-${OPEN_CV_VERSION}-aarch64-ubuntu20.zip && \
     apt update && \
     apt install -y --no-install-recommends -f ./*.deb && \
     rm -rf /var/lib/apt/lists/* && \
